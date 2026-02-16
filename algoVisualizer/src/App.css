@@ -10,7 +10,7 @@ h1 {
 }
 
 .btn{
-  /* soon to have both properties for buttons */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .btn.random{
@@ -21,4 +21,20 @@ h1 {
 .btn.play {
   /* have to set background image */
   background-image: url('/path/to/icon.svg');
+}
+
+.btn.bubble {
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
+  position: absolute;
+  right: 20px;
+  top: 80px;
+}
+
+.btn.merge {
+  /* have to set background image */
+  background-image: url('/path/to/icon.svg');
+  position: absolute;
+  right: 20px;
+  top: 130px;
 }
