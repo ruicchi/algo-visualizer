@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
 
 const SortingVisualizerLogic = () => {
+  //notes: this is my programming diary | all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
+
   //# Visualizer Logic is here 
   
   //* initializing empty array for random array generator
@@ -18,10 +20,8 @@ const SortingVisualizerLogic = () => {
   const handleArraySize = (event) => {
     setArraySize(event.target.value);
   };
-  
-  //todo: synchronize the slider on the slider for arraySize to the function
 
-  //todo: this array mapper | not yet working | planning to make it on another file
+  //todo: array mapper to have styles on numbers | not yet working | planning to make it on another file
   // const arrayBars = array.map((value, index) => (
   //     <div
   //       key={index}
