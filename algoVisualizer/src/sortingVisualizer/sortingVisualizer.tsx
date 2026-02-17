@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
 
 const SortingVisualizerLogic = () => {
-  // Visualizer Logic is here 
+  //# Visualizer Logic is here 
   
-  // ... TO STUDY initializing empty array for random array generator
+  //* initializing empty array for random array generator
   const [array, setArray] = useState([]);
 
-  // State for progress speed and animation speed, using percentage for easier understanding
+  //* State for progress speed and animation speed, using percentage for easier understanding
   const [progressSpeed, setProgressSpeed] = useState(50);
   const [arraySize, setArraySize] = useState(20);
 
-  // Handlers for sliders
+  //* Handlers for sliders
   const handleSpeedChange = (event) => {
     setProgressSpeed(event.target.value);
   };
@@ -19,11 +19,23 @@ const SortingVisualizerLogic = () => {
     setArraySize(event.target.value);
   };
   
-  // There has to be mapper for array bar
+  //todo: synchronize the slider on the slider for arraySize to the function
 
-  // There has to be logic that generates an array if size is changed, this is useEffect
+  //todo: this array mapper | not yet working | planning to make it on another file
+  // const arrayBars = array.map((value, index) => (
+  //     <div
+  //       key={index}
+  //       className="arrayBar"
+  //       style={{ height: `${value * 3}px` }}
+  //     >
+  //       <span>{value}</span>
+  //       <span className="indexLabel">{index}</span>
+  //     </div>
+  //   ));
 
-  // Random array creator
+  //! There has to be logic that generates an array if size is changed, this is useEffect
+
+  //* Random array creator | numbers from 10 to 409
   const generateNewArray = () => {
     const newArray = [];
     for (let i = 0; i < arraySize; i++) {
@@ -35,14 +47,14 @@ const SortingVisualizerLogic = () => {
 
   return (
     <div className="SortingVisualizer">
-      {/* Visual UI is here*/}
+      {/* //# Visual UI is here*/}
 
-      {/* ... TO STUDY array container*/}
-      <div className = 'arrayContainer'>
+      {/* //study this array container*/}
+      {/* <div className = 'arrayContainer'>
         {arrayBars}
-      </div>
+      </div> */}
 
-      {/* buttons */}
+      {/* //* buttons */}
       <h1>Sorting Visualizer</h1>
         <button className='btn random' onClick={generateNewArray}>randomize</button>
         <button className='btn play'>play</button>
@@ -51,11 +63,14 @@ const SortingVisualizerLogic = () => {
         <button className='btn seekLeft'>seek left</button>
         <button className='btn seekRight'>seek right</button>
 
-        {/* algorithm selector planning to add more*/}
+        {/* //debug: Show array as text */}
+        <p>Array: {JSON.stringify(array)}</p>
+
+        {/* //* algorithm selector | planning to add more*/}
         <button className='btn bubble'>bubble sort</button>
         <button className='btn merge'>merge sort</button>
         
-        {/* slider for progress speed, planning to have thresholds or marks*/}
+        {/* //* slider for progress speed, planning to have thresholds or marks*/}
         <div className='slider progressSpeed'>
           <label>Progress Speed: {progressSpeed}%</label>
           <input 
@@ -67,7 +82,7 @@ const SortingVisualizerLogic = () => {
           />
         </div>
 
-        {/* slider for array size*/}
+        {/* //* slider for array size*/}
         <div className='slider arraySize'>
           <label>Array size: {arraySize}</label>
           <input 
