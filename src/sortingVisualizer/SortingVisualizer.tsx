@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; //todo add useEffect later
+import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
 import bubbleSort from './BubbleSortLogic';
 import mergeSort from './MergeSortLogic';
