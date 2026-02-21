@@ -14,6 +14,14 @@ const SortingVisualizerLogic = () => {
   const [progressSpeed, setProgressSpeed] = useState(50);
   const [arraySize, setArraySize] = useState(20);
 
+  //* State to track which algorithm is selected
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState('bubble');
+
+  //* Algorithm selector handler
+    const handleAlgorithmSelect = (algorithm) => {
+      setSelectedAlgorithm(algorithm);
+    };
+
   //* Handlers for sliders
   const handleSpeedChange = (event) => {
     setProgressSpeed(event.target.value);
@@ -46,9 +54,21 @@ const SortingVisualizerLogic = () => {
     setArray(newArray);
   };
 
-  //* Play button handler - triggers bubble sort
+  //* Play button handler
   const handlePlay = () => {
-    const sortedArray = bubbleSort(array);
+    let sortedArray;
+
+    switch(selectedAlgorithm) {
+      case 'bubble':
+        sortedArray = bubbleSort(array);
+        break;
+      case 'merge':
+        // sortedArray = mergeSort(array); //! placeholder
+        break;
+      default:
+        sortedArray = bubbleSort(array);
+    }
+    
     setArray(sortedArray);
   };
 
@@ -74,13 +94,23 @@ const SortingVisualizerLogic = () => {
         <p>Array: {JSON.stringify(array)}</p>
 
         {/* //* algorithm selector | planning to add more*/}
-        <button className='btn bubble'>bubble sort</button>
-        <button className='btn merge'>merge sort</button>
+        <button 
+          className={`btn bubble ${selectedAlgorithm == 'bubble' ? 'active' : ''}`}
+          onClick={() => handleAlgorithmSelect('bubble')}
+        >
+          bubble sort
+        </button>
+        <button 
+          className={`btn merge ${selectedAlgorithm == 'merge' ? 'active' : ''}`}
+          onClick={() => handleAlgorithmSelect('merge')}
+        >
+          merge sort
+        </button>
         
         {/* //* slider for progress speed, planning to have thresholds or marks*/}
         <div className='slider progressSpeed'>
           <label>Progress Speed: {progressSpeed}%</label>
-          <input 
+          <input
             type = 'range' 
             min = '1'
             max = '100'
