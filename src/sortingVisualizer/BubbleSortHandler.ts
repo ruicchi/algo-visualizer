@@ -1,6 +1,6 @@
-const handleBubbleSortClick = () => {
+const handleBubbleSortSteps = () => {
     //* Generate all steps
-    const sortingSteps = generateBubbleSortSteps(array);
+    const sortingSteps = handleBubbleSortSteps(array);
     
     //* Store steps in state
     setSteps(sortingSteps);
@@ -11,5 +11,3 @@ const handleBubbleSortClick = () => {
     
     console.log("Generated steps:", sortingSteps.length);
   };
-
-export default handleBubbleSortClick;
