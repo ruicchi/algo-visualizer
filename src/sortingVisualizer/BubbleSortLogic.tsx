@@ -1,7 +1,7 @@
 //# bubble sort algorithm
 //study
 
-function bubbleSort(inputArray: number[]): number[] {
+function generateBubbleSortSteps(inputArray: number[]): Step[] {
   //* Clones the input array to avoid mutating the original
   const array = [...inputArray];
 
@@ -57,7 +57,7 @@ function bubbleSort(inputArray: number[]): number[] {
     });
   }
 
-  return array;
+  return steps;
 }
 
-export default bubbleSort;
+export default generateBubbleSortSteps;
