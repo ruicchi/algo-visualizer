@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
-import bubbleSort from "./BubbleSortLogic";
 import generateBubbleSortSteps from "./BubbleSortLogic";
-// import mergeSort from './MergeSortLogic';
+// import mergeSort from './MergeSortLogic'; //! to be added
 
 const SortingVisualizerLogic = () => {
-  //notes: this is my programming diary | all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
+  //notes: all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
  
   //# Visualizer Logic is here 
 
   //* initializing empty array for random array generator
   const [array, setArray] = useState([]);
 
-  //* State for progress speed and animation speed, using percentage for easier understanding
-  const [progressSpeed, setProgressSpeed] = useState(50);
-  const [arraySize, setArraySize] = useState(15);
+  //* State for progress speed and array sizes, using percentage for easier understanding
+  const [progressSpeed, setProgressSpeed] = useState<number[]>(50);
+  const [arraySize, setArraySize] = useState<number[]>(15);
 
   //* Animation states
   const [steps, setSteps] = useState<Step[]>([]); //^ where all sorting steps are
@@ -24,7 +23,7 @@ const SortingVisualizerLogic = () => {
   const [sortedIndices, setSortedIndices] = useState<number[]>([]); //^ which bars are in final position
 
   //* State to track which algorithm is selected
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState('bubble');
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState('Pick an algorithm!');
 
   //* handler for play
   const handlePlayClick = () => {
@@ -43,24 +42,23 @@ const SortingVisualizerLogic = () => {
     setComparingIndices([]);
     setSortedIndices([]);
   };
-
-  const handleBubbleSortClick= () => {
-    //* Generate all steps
-    const sortingSteps = generateBubbleSortSteps(array);
+  
+  //* handler for bubble sort
+  const handleBubbleSort= () => {
+    const sortingSteps = generateBubbleSortSteps(array); //^ Generate all steps
+    setSelectedAlgorithm('bubble') //^ sets selected algorithm
+  
+    setSteps(sortingSteps); //^ Store steps in state
     
-    //* Store steps in state
-    setSteps(sortingSteps);
-    
-    //* Reset to beginning
+    //* resets to beginning
     setCurrentStepIndex(0);
     setIsPlaying(false);
-    
+
     console.log("Generated steps:", sortingSteps.length);
   };
 
   useEffect(() => {
-    //study
-    //* Only run if playing and not at end
+    //* only runs if playing and not at end
     if (isPlaying && currentStepIndex < steps.length - 1) {
       
       //* Calculate delay based on speed slider
@@ -98,11 +96,6 @@ const SortingVisualizerLogic = () => {
     }
   }, [currentStepIndex, steps]);
 
-  //* Algorithm selector handler
-  const handleAlgorithmSelect = (algorithm) => {
-    setSelectedAlgorithm(algorithm);
-  };
-
   //* Handlers for sliders
   const handleSpeedChange = (event) => {
     setProgressSpeed(event.target.value);
@@ -126,29 +119,18 @@ const SortingVisualizerLogic = () => {
     generateNewArray();
   }, [arraySize]);
 
-  //! Play button handler | my original one
+  //* when you click an sorting button
   const handleSortTypeClick = (selectedAlgorithm) => {
-    let sortingSteps = [];
-
     switch(selectedAlgorithm) {
       case 'bubble':
-        sortingSteps = bubbleSort(array);
+        handleBubbleSort(array);
         break;
-      // case 'merge':
-      //   sortingSteps = mergeSort(array);
-      //   break;
+      case 'merge':
+        sortingSteps = mergeSort(array);
+        break;
       default:
-        sortingSteps = bubbleSort(array);
+        handleBubbleSort(array);
     }
-    
-    //* resets these things if play button is clicked
-    setSelectedAlgorithm(selectedAlgorithm);
-    setSteps(sortingSteps);
-    setCurrentStepIndex(0);
-    setIsPlaying(false);
-
-    //debug: displays the algorithm and length of steps
-    console.log(`${selectedAlgorithm} sort - Generated ${sortingSteps.length} steps`);
   };
 
   //* Array mapper to have bars on numbers with index
@@ -203,7 +185,7 @@ const SortingVisualizerLogic = () => {
         {/* //* algorithm selector | planning to add more*/}
         <button 
           className={`btn bubble ${selectedAlgorithm == 'bubble' ? 'active' : ''}`}
-          onClick={() => handleBubbleSortClick('bubble')}
+          onClick={() => handleSortTypeClick('bubble')}
         >
           bubble sort
         </button>
