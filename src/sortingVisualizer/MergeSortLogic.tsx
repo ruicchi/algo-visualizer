@@ -15,7 +15,7 @@ function generateMergeSortSteps(inputArray: number[]): Step[] {
     activeIndices: []
   });
 
-  mergeSort(array, 0, array.length - 1, steps);
+  mergeSortHelper(array, 0, array.length - 1, steps);
   
   //* Final state - everything sorted
   steps.push({
@@ -29,53 +29,58 @@ function generateMergeSortSteps(inputArray: number[]): Step[] {
   return steps;
 }
 
-function mergeSort(array: number[], left: number, right: number, steps: Step[]): void {
+function mergeSortHelper(array: number[], left: number, right: number, steps: Step[]): void {
   if (left >= right) {
     return;
   }
 
   const middle = Math.floor((left + right) / 2);
   
-  //* Recursively sort left and right halves
-  mergeSort(array, left, middle, steps);
-  mergeSort(array, middle + 1, right, steps);
-  
-  //* Conquer: Merge the sorted halves
-  merge(array, left, middle, right, steps);
-}
-
-function merge(array: number[], left: number, middle: number, right: number, steps: Step[]): void {
-  //* Show the active subarray being merged
-  const activeIndices = [];
-  for (let idx = left; idx <= right; idx++) {
-    activeIndices.push(idx);
+  //* Divide phase - show the subarray being split
+  const divideIndices = [];
+  for (let i = left; i <= right; i++) {
+    divideIndices.push(i);
   }
   steps.push({
     array: [...array],
     comparingIndices: [],
     swappingIndices: [],
     sortedIndices: [],
-    activeIndices: activeIndices
+    activeIndices: divideIndices
   });
-
-  //* Create copies of the subarrays
-  const leftArray = [];
-  const rightArray = [];
   
+  //* Recursively sort left and right halves
+  mergeSortHelper(array, left, middle, steps);
+  mergeSortHelper(array, middle + 1, right, steps);
+  
+  //* Merge the sorted halves
+  merge(array, left, middle, right, steps);
+}
+
+function merge(array: number[], left: number, middle: number, right: number, steps: Step[]): void {
+  //* Create auxiliary arrays
+  const leftArray = [];
   for (let i = left; i <= middle; i++) {
     leftArray.push(array[i]);
   }
+  
+  const rightArray = [];
   for (let i = middle + 1; i <= right; i++) {
     rightArray.push(array[i]);
   }
   
-  let i = 0;
-  let j = 0;
-  let k = left;
+  let i = 0;  //* Index for leftArray
+  let j = 0;  //* Index for rightArray
+  let k = left;  //* Index for merged array
+  
+  const activeIndices = [];
+  for (let idx = left; idx <= right; idx++) {
+    activeIndices.push(idx);
+  }
 
-  //* Merge the two sorted subarrays
+  //* Merge process
   while (i < leftArray.length && j < rightArray.length) {
-    //* Show comparison between elements from left and right subarrays
+    //* Show which elements are being compared
     steps.push({
       array: [...array],
       comparingIndices: [left + i, middle + 1 + j],
@@ -83,39 +88,29 @@ function merge(array: number[], left: number, middle: number, right: number, ste
       sortedIndices: [],
       activeIndices: activeIndices
     });
-
+    
+    //* Choose the smaller element
     if (leftArray[i] <= rightArray[j]) {
       array[k] = leftArray[i];
-      
-      //* Show the element being placed in merged position
-      steps.push({
-        array: [...array],
-        comparingIndices: [],
-        swappingIndices: [k],
-        sortedIndices: [],
-        activeIndices: activeIndices
-      });
-      
       i++;
     } else {
       array[k] = rightArray[j];
-      
-      //* Show the element being placed in merged position
-      steps.push({
-        array: [...array],
-        comparingIndices: [],
-        swappingIndices: [k],
-        sortedIndices: [],
-        activeIndices: activeIndices
-      });
-      
       j++;
     }
     
+    //* Show the element placed in position
+    steps.push({
+      array: [...array],
+      comparingIndices: [],
+      swappingIndices: [k],
+      sortedIndices: [],
+      activeIndices: activeIndices
+    });
+    
     k++;
   }
-
-  //* Copy remaining elements from left subarray
+  
+  //* Copy remaining elements from left array
   while (i < leftArray.length) {
     array[k] = leftArray[i];
     steps.push({
@@ -128,8 +123,8 @@ function merge(array: number[], left: number, middle: number, right: number, ste
     i++;
     k++;
   }
-
-  //* Copy remaining elements from right subarray
+  
+  //* Copy remaining elements from right array
   while (j < rightArray.length) {
     array[k] = rightArray[j];
     steps.push({
