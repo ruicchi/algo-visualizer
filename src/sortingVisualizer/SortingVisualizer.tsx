@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
 import generateBubbleSortSteps from "./BubbleSortLogic";
-// import mergeSort from './MergeSortLogic'; //! to be added
+import generateMergeSortSteps from "./MergeSortLogic";
 
 const SortingVisualizerLogic = () => {
   //notes: all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
@@ -21,6 +21,7 @@ const SortingVisualizerLogic = () => {
   const [isPlaying, setIsPlaying] = useState(false); //^ is the animation playing?
   const [comparingIndices, setComparingIndices] = useState<number[]>([]); //^ which bars to highlight?
   const [sortedIndices, setSortedIndices] = useState<number[]>([]); //^ which bars are in final position
+  const [swappingIndices, setSwappingIndices] = useState<number[]>([]); //^ which bars are swapping?
 
   //* State to track which algorithm is selected
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('Pick an algorithm!');
@@ -75,9 +76,10 @@ const SortingVisualizerLogic = () => {
       setCurrentStepIndex(0);
       console.log("Regenerated bubble sort steps:", sortingSteps.length);
     } else if (selectedAlgorithm == 'merge') {
-      // const sortingSteps = mergeSort(currentArray);
-      // setSteps(sortingSteps);
-      // setCurrentStepIndex(0);
+      const sortingSteps = generateMergeSortSteps(currentArray);
+      setSteps(sortingSteps);
+      setCurrentStepIndex(0);
+      console.log("Regenerated bubble sort steps:", sortingSteps.length);
     }
   };
 
@@ -85,6 +87,20 @@ const SortingVisualizerLogic = () => {
   const handleBubbleSort= () => {
     const sortingSteps = generateBubbleSortSteps(array); //^ Generate all steps
     setSelectedAlgorithm('bubble') //^ sets selected algorithm
+  
+    setSteps(sortingSteps); //^ Store steps in state
+    
+    //* resets to beginning
+    setCurrentStepIndex(0);
+    setIsPlaying(false);
+
+    console.log("Generated steps:", sortingSteps.length);
+  };
+
+  //* handler for merge sort
+  const handleMergeSort= () => {
+    const sortingSteps = generateMergeSortSteps(array); //^ Generate all steps
+    setSelectedAlgorithm('merge') //^ sets selected algorithm
   
     setSteps(sortingSteps); //^ Store steps in state
     
@@ -130,6 +146,7 @@ const SortingVisualizerLogic = () => {
     if (currentStep) {
       setArray(currentStep.array);
       setComparingIndices(currentStep.comparingIndices || []);
+      setSwappingIndices(currentStep.swappingIndices || []);
       setSortedIndices(currentStep.sortedIndices || []);
     }
   }, [currentStepIndex, steps]);
@@ -154,10 +171,8 @@ const SortingVisualizerLogic = () => {
         handleBubbleSort(array);
         break;
       case 'merge':
-        sortingSteps = mergeSort(array);
+        handleMergeSort(array);
         break;
-      default:
-        handleBubbleSort(array);
     }
   };
 
@@ -168,7 +183,9 @@ const SortingVisualizerLogic = () => {
       if (sortedIndices.includes(index)) {
         barColor = '#10b981';  //* Green for sorted
       } else if (comparingIndices.includes(index)) {
-        barColor = '#ef4444';  //* Red for comparing
+        barColor = '#f59e0b';  //* Orang for comparing
+      } else if (swappingIndices && swappingIndices.includes(index)) {
+        barColor = '#ef4444';  //* Red for swapping
       }
 
       return (
