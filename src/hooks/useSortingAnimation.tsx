@@ -5,12 +5,15 @@ import generateBubbleSortSteps from '../algorithms/bubbleSort';
 import generateMergeSortSteps from '../algorithms/mergeSort';
 
 //* hook for animations
-export const useSortingAnimation = (progressSpeed, arraySize, generateNewArray, setArray, selectedAlgorithm, array) => {
+export const useSortingAnimation = (arraySize, setArraySize, generateNewArray, setArray, selectedAlgorithm, array) => {
 
   //* initializes steps, index, and playing state
   const [steps, setSteps] = useState([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  //* State for progress speed, using percentage for easier understanding
+  const [progressSpeed, setProgressSpeed] = useState<number[]>(50);
   
   //* Animation states
   const [comparingIndices, setComparingIndices] = useState<number[]>([]); //^ which bars to highlight?
@@ -171,6 +174,8 @@ export const useSortingAnimation = (progressSpeed, arraySize, generateNewArray, 
     setCurrentStepIndex,
     isPlaying,
     setIsPlaying,
+    progressSpeed,
+    setProgressSpeed,
     comparingIndices,
     setComparingIndices,
     play,

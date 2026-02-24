@@ -7,8 +7,6 @@ const SortingVisualizerLogic = () => {
   //notes: all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
  
   //# Visualizer Logic is here 
-  //* State for progress speed, using percentage for easier understanding
-  const [progressSpeed, setProgressSpeed] = useState<number[]>(50);
 
   //* State to track which algorithm is selected
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('Pick an algorithm!');
@@ -28,6 +26,8 @@ const SortingVisualizerLogic = () => {
     setCurrentStepIndex,
     isPlaying, //study
     setIsPlaying,
+    progressSpeed,
+    setProgressSpeed,
     comparingIndices, //study
     setComparingIndices, //study
     play,
@@ -41,7 +41,7 @@ const SortingVisualizerLogic = () => {
     handleProgressChange,
     currentStep, //study
     arrayBars,
-  } = useSortingAnimation(progressSpeed, arraySize, generateNewArray, setArray, selectedAlgorithm, array)
+  } = useSortingAnimation(arraySize, setArraySize, generateNewArray, setArray, selectedAlgorithm, array)
 
   //! to delete - listener for arraysizes | outdated
   useEffect(() => {
@@ -109,7 +109,7 @@ const SortingVisualizerLogic = () => {
         
       {/* //study slider for progress through steps */}
       <div className='slider progress'>
-        <label>Progress: Step {currentStepIndex + 1} of {steps.length}</label>
+        <label>Progress: {currentStepIndex + 1} of {steps.length}</label>
         <input
           type='range'
           min='0'
