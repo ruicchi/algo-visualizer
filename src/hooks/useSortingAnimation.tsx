@@ -1,6 +1,8 @@
 //# sorting animation hook
 
 import { useState, useEffect } from 'react';
+import generateBubbleSortSteps from '../algorithms/bubbleSort';
+import generateMergeSortSteps from '../algorithms/mergeSort';
 
 //* hook for animations
 export const useSortingAnimation = (progressSpeed, arraySize, generateNewArray, setArray, selectedAlgorithm, array) => {
@@ -71,7 +73,7 @@ export const useSortingAnimation = (progressSpeed, arraySize, generateNewArray, 
     }
   };
 
-  const regenerateSteps = (currentArray: number[]) => {
+   const regenerateSteps = (currentArray: number[]) => {
     if (selectedAlgorithm == 'bubble') {
       const sortingSteps = generateBubbleSortSteps(currentArray);
       setSteps(sortingSteps);
@@ -98,8 +100,9 @@ export const useSortingAnimation = (progressSpeed, arraySize, generateNewArray, 
       setActiveIndices(currentStep.activeIndices || []);
     }
   }, [currentStepIndex]);
-    
-  const arrayBars = array.map((value, index) => {
+
+  //* visual bars for array
+  const arrayBars = (array || []).map((value, index) => {
       
       let barColor = '#00a4db';  //* Default blue
   

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./SortingVisualizer.css";
-import generateBubbleSortSteps from "../algorithms/bubbleSort";
-import generateMergeSortSteps from "../algorithms/mergeSort";
 import { useArrayGenerator, useSortingAnimation } from '../hooks';
 import { handleSortTypeClick } from "../handlers/handleAlgorithms";
 
@@ -111,10 +109,10 @@ const SortingVisualizerLogic = () => {
     setIsPlaying(false); //* Pause when manually scrubbing
   };
 
-  // //! to delete - listener for arraysizes | outdated
-  // useEffect(() => {
-  //   handleRandomizeClick();
-  // }, [arraySize]);
+  //! to delete - listener for arraysizes | outdated
+  useEffect(() => {
+    randomize();
+  }, [arraySize]);
 
   // //* when you click a sorting button
   // const handleSortTypeClick = (selectedAlgorithm) => {
@@ -175,7 +173,7 @@ const SortingVisualizerLogic = () => {
           merge sort
         </button>
         
-        {/* //study slider for progress through steps */}
+      {/* //study slider for progress through steps */}
       <div className='slider progress'>
         <label>Progress: Step {currentStepIndex + 1} of {steps.length}</label>
         <input

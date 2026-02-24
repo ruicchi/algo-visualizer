@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-export const useArrayGenerator = (initialSize: number = 15) => {
+export const useArrayGenerator = () => {
 
   //* initializing empty array and array size for random array generator
   const [array, setArray] = useState<number[]>([]);
-  const [arraySize, setArraySize] = useState<number>(initialSize);
+  const [arraySize, setArraySize] = useState<number>(15);
 
   //* random array generator
   const generateNewArray = useCallback(() => {
@@ -16,6 +16,7 @@ export const useArrayGenerator = (initialSize: number = 15) => {
       newArray.push(randomValue);
     }
     setArray(newArray);
+    return newArray;
   }, [arraySize]);
 
   //* listener that generates new array
@@ -28,6 +29,6 @@ export const useArrayGenerator = (initialSize: number = 15) => {
     setArray,
     arraySize,
     setArraySize,
-    generateNewArray
+    generateNewArray,
   };
 };
