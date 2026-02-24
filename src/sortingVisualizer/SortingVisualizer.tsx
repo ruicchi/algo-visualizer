@@ -48,8 +48,6 @@ const SortingVisualizerLogic = () => {
       array
     )
 
-  //study Array mapper to have bars on numbers with index
-
   return (
     <div className="SortingVisualizer">
       {/* //# Visual UI is here*/}
