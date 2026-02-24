@@ -5,12 +5,18 @@ import generateBubbleSortSteps from '../algorithms/bubbleSort';
 import generateMergeSortSteps from '../algorithms/mergeSort';
 
 //* hook for animations
-export const useSortingAnimation = (arraySize, setArraySize, generateNewArray, setArray, selectedAlgorithm, array) => {
+export const useSortingAnimation = (
+  arraySize, 
+  setArraySize,
+  generateNewArray, 
+  setArray, 
+  selectedAlgorithm, 
+  array) => {
 
   //* initializes steps, index, and playing state
   const [steps, setSteps] = useState([]);
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   //* State for progress speed, using percentage for easier understanding
   const [progressSpeed, setProgressSpeed] = useState<number[]>(50);
@@ -76,6 +82,11 @@ export const useSortingAnimation = (arraySize, setArraySize, generateNewArray, s
     }
   };
 
+  //* listener for array sizes
+  useEffect(() => {
+    randomize();
+  }, [arraySize]);
+
   //study handler for seek left (go to previous step)
   const seekLeft = () => {
     if (currentStepIndex > 0) {
@@ -136,8 +147,8 @@ export const useSortingAnimation = (arraySize, setArraySize, generateNewArray, s
     }
   }, [currentStepIndex]);
 
-  //* visual bars for array
-  const arrayBars = (array || []).map((value, index) => {
+  //study array mapper to have bars on numbers with index
+  const arrayBars = array.map((value, index) => {
       
       let barColor = '#00a4db';  //* Default blue
   

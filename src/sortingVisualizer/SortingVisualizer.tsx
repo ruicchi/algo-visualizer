@@ -4,10 +4,10 @@ import { useArrayGenerator, useSortingAnimation } from '../hooks';
 import { handleSortTypeClick } from "../handlers/handleAlgorithms";
 
 const SortingVisualizerLogic = () => {
+  //# main
+
   //notes: all functions are arrow functions, 'cause i think it's more intuitive to use than normal ones. 
  
-  //# Visualizer Logic is here 
-
   //* State to track which algorithm is selected
   const [selectedAlgorithm, setSelectedAlgorithm] = useState('Pick an algorithm!');
   //study array generator with desctructuring syntax, making them local variables
@@ -41,24 +41,12 @@ const SortingVisualizerLogic = () => {
     handleProgressChange,
     currentStep, //study
     arrayBars,
-  } = useSortingAnimation(arraySize, setArraySize, generateNewArray, setArray, selectedAlgorithm, array)
-
-  //! to delete - listener for arraysizes | outdated
-  useEffect(() => {
-    randomize();
-  }, [arraySize]);
-
-  // //* when you click a sorting button
-  // const handleSortTypeClick = (selectedAlgorithm) => {
-  //   switch(selectedAlgorithm) {
-  //     case 'bubble':
-  //       handleBubbleSort(array);
-  //       break;
-  //     case 'merge':
-  //       handleMergeSort(array);
-  //       break;
-  //   }
-  // };
+  } = useSortingAnimation(arraySize, 
+      setArraySize, 
+      generateNewArray, setArray, 
+      selectedAlgorithm, 
+      array
+    )
 
   //study Array mapper to have bars on numbers with index
 

@@ -1,4 +1,4 @@
-//# handlers for algorithms
+//# handlers for algorithms for when an algorithm button is clicked
 //todo
 
 import generateBubbleSortSteps from '../algorithms/bubbleSort';
