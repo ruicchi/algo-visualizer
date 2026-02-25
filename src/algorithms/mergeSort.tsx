@@ -3,7 +3,7 @@
 //study
 
 function generateMergeSortSteps(inputArray: number[]): Step[] {
-  const steps: Step[] = [];
+  const steps = [];
   const array = [...inputArray];
   
   //* Store initial state

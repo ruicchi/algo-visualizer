@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./SortingVisualizer.css";
 import { useArrayGenerator, useSortingAnimation } from '../hooks';
 import { handleSortTypeClick } from "../handlers/handleAlgorithms";
@@ -17,7 +17,7 @@ const SortingVisualizerLogic = () => {
     arraySize,
     setArraySize,
     generateNewArray
-  } = useArrayGenerator(15);
+  } = useArrayGenerator();
 
   const {
     steps,
