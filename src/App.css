@@ -13,3 +13,32 @@ h1 {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+.btn {
+  background: #1F1F1F;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  display: flex;
+}
+
+.btn:hover {
+  background: #9F9F9F;
+  transform: translateY(-2px) scale(1.04);
+  transition: 
+    filter 0.2s ease-out,
+    transform 0.2s ease-out;
+  outline: none;
+}
+
+/* Optional: stronger effect for active/clicked state */
+.btn:active {
+  filter: brightness(0.95);
+  transform: scale(0.98);
+}

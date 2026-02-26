@@ -1,74 +1,58 @@
 /** styles for buttons */
 
-.btn.random{
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
+/** Center the control buttons horizontally */
+.controlButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 24px;
 }
 
-.btn.play {
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
+.sortingButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
 }
 
-.btn.pause {
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
+.sortingButtons .btn {
+  min-width: 150px;
+  min-height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 12px 24px;
 }
 
-.btn.stop{
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-}
-
-.btn.seekLeft{
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-}
-
-.btn.seekRight{
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-}
-
-
-.btn.bubble {
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-  position: absolute;
-  right: 20px;
-  top: 80px;
-}
-
-.btn.merge {
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-  position: absolute;
-  right: 20px;
-  top: 130px;
-}
-
-.btn.quick {
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-  position: absolute;
-  right: 20px;
-  top: 180px;
-}
-
-.btn.selection {
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-  position: absolute;
-  right: 20px;
-  top: 230px;
-}
-
+.btn.bubble,
+.btn.merge,
+.btn.quick,
+.btn.selection,
 .btn.heap {
-  /* have to set background image */
-  background-image: url('/path/to/icon.svg');
-  position: absolute;
-  right: 20px;
-  top: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/** Focus effect ONLY for algorithm buttons */
+.btn.bubble:focus,
+.btn.merge:focus,
+.btn.quick:focus,
+.btn.selection:focus,
+.btn.heap:focus {
+  background: #9F9F9F;
+  transform: translateY(-2px) scale(1.04);
+  transition: 
+    filter 0.2s ease-out,
+    transform 0.2s ease-out;
+  outline: none;
 }
 
 .arrayContainer {

@@ -53,64 +53,71 @@ const SortingVisualizerLogic = () => {
       {/* //# Visual UI is here*/}
 
       {/* //* calls the arrayBars function and gives classname*/}
-      <div className = 'arrayContainer'>
-        {arrayBars}
-      </div>
+      <div className = 'arrayRelative'>
+        <div className = 'arrayContainer'>
+          {arrayBars}
+        </div>
 
+        <div className="sortingButtons">
+            <button 
+              className={`btn bubble`}
+              onClick={() => handleSortTypeClick('bubble', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+            >
+              Bubble Sort
+            </button>
+            <button 
+              className={`btn merge`}
+              onClick={() => handleSortTypeClick('merge', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+            >
+              Merge Sort
+            </button>
+            <button 
+              className={`btn quick`}
+              onClick={() => handleSortTypeClick('quick', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+            >
+              Quick Sort
+            </button>
+            <button 
+              className={`btn selection`}
+              onClick={() => handleSortTypeClick('selection', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+            >
+              Selection Sort
+            </button>
+            <button 
+              className={`btn heap`}
+              onClick={() => handleSortTypeClick('heap', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+            >
+              Heap Sort
+            </button>
+          </div>
+      </div>
+      
       <h1>Sorting Visualizer</h1>
       <p>Algorithm: {selectedAlgorithm}</p>
 
         {/* //* buttons */}
-        <button className='btn random' onClick={randomize}>randomize</button>
-        <button className='btn play' onClick={play}>play</button>
-        <button className='btn pause' onClick={pause}>pause</button>
-        <button className='btn stop' onClick={reset}>reset</button>
-        <button 
-          className='btn seekLeft' 
-          onClick={seekLeft}
-          disabled={currentStepIndex === 0 || steps.length === 0}
-        >seek left</button>
-        <button 
-          className='btn seekRight'
-          onClick={seekRight}
-          disabled={currentStepIndex >= steps.length - 1 || steps.length === 0}
-        >seek right</button>
+        <div className="controlButtons">
+          <button 
+            className='btn seekLeft' 
+            onClick={seekLeft}
+            disabled={currentStepIndex === 0 || steps.length === 0}
+          >ᐸ</button>
+          <button className='btn random' onClick={randomize}>↳↰</button>
+          <button className='btn play' onClick={play}>▶</button>
+          <button className='btn pause' onClick={pause}>❚❚</button>
+          <button className='btn stop' onClick={reset}>⟳</button>
+          <button 
+            className='btn seekRight'
+            onClick={seekRight}
+            disabled={currentStepIndex >= steps.length - 1 || steps.length === 0}
+          >ᐳ</button>
+        </div>
 
         {/* //debug: Show array as text */}
         <p>Array: {JSON.stringify(array)}</p>
 
-        {/* //* algorithm selector | planning to add more*/}
-        <button 
-          className={`btn bubble`}
-          onClick={() => handleSortTypeClick('bubble', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-        >
-          bubble sort
-        </button>
-        <button 
-          className={`btn merge`}
-          onClick={() => handleSortTypeClick('merge', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-        >
-          merge sort
-        </button>
-        <button 
-          className={`btn quick`}
-          onClick={() => handleSortTypeClick('quick', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-        >
-          quick sort
-        </button>
-        <button 
-          className={`btn selection`}
-          onClick={() => handleSortTypeClick('selection', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-        >
-          selection sort
-        </button>
-        <button 
-          className={`btn heap`}
-          onClick={() => handleSortTypeClick('heap', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
-        >
-          heap sort
-        </button>
-        
+        {/* //* algorithm selector | vertical on right */}
+
       {/* //study slider for progress through steps */}
       <div className='slider progress'>
         <label>Progress: {currentStepIndex + 1} of {steps.length}</label>
