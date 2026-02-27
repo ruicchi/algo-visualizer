@@ -15,7 +15,7 @@ function generateInsertionSortSteps(inputArray: number[]): Step[] {
   });
 
   for (let i = 1; i < array.length; i++) {
-    let key = array[i];
+    const key = array[i];
     let j = i - 1;
 
     // Highlight the key being inserted
