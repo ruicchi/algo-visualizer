@@ -51,12 +51,13 @@ const SortingVisualizerLogic = () => {
 
   //* object for display names
   const algorithmNames = {
-    bubble: "Bubble Sort",
-    merge: "Merge Sort",
-    quick: "Quick Sort",
-    selection: "Selection Sort",
-    heap: "Heap Sort",
-    insertion: "Insertion Sort"
+    bubble: 'Bubble Sort',
+    merge: 'Merge Sort',
+    quick: 'Quick Sort',
+    selection: 'Selection Sort',
+    heap: 'Heap Sort',
+    insertion: 'Insertion Sort',
+    radix: 'Radix Sort'
   };
 
   //* mapper for display names
@@ -108,6 +109,12 @@ const SortingVisualizerLogic = () => {
             onClick={() => handleSortTypeClick('insertion', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
           >
             Insertion Sort
+          </button>
+          <button 
+            className={`btn radix`}
+            onClick={() => handleSortTypeClick('radix', array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying)}
+          >
+            Radix Sort
           </button>
         </div>
 

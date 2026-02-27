@@ -64,7 +64,7 @@ function generateInsertionSortSteps(inputArray: number[]): Step[] {
     });
   }
 
-  // Mark all sorted at the end
+  //* Mark all sorted at the end
   steps.push({
     array: [...array],
     sortedIndices: Array.from({ length: array.length }, (_, idx) => idx),

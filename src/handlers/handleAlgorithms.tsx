@@ -7,6 +7,7 @@ import generateQuickSortSteps from '../algorithms/quickSort';
 import generateSelectionSortSteps from '../algorithms/selectionSort';
 import generateHeapSortSteps from '../algorithms/heapSort';
 import generateInsertionSortSteps from '../algorithms/insertionSort';
+import generateRadixSortSteps from '../algorithms/radixSort';
 
 //* when you click a sorting button
 export const handleSortTypeClick = (
@@ -35,6 +36,9 @@ export const handleSortTypeClick = (
       break;
     case 'insertion':
       handleInsertionSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      break;
+    case 'radix':
+      handleRadixSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
       break;
   }
 };
@@ -149,6 +153,26 @@ const handleInsertionSort = (
 ) => {
   const sortingSteps = generateInsertionSortSteps(array); //^ Generate all steps
   setSelectedAlgorithm('insertion'); //^ sets selected algorithm
+
+  setSteps(sortingSteps); //^ Store steps in state
+
+  //* resets to beginning
+  setCurrentStepIndex(0);
+  setIsPlaying(false);
+
+  console.log("Generated steps:", sortingSteps.length);
+};
+
+//* handler for radix sort
+const handleRadixSort = (
+  array,
+  setSelectedAlgorithm,
+  setSteps,
+  setCurrentStepIndex,
+  setIsPlaying
+) => {
+  const sortingSteps = generateRadixSortSteps(array); //^ Generate all steps
+  setSelectedAlgorithm('radix'); //^ sets selected algorithm
 
   setSteps(sortingSteps); //^ Store steps in state
 

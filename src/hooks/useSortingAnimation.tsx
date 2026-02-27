@@ -7,6 +7,7 @@ import generateQuickSortSteps from '../algorithms/quickSort';
 import generateSelectionSortSteps from '../algorithms/selectionSort';
 import generateHeapSortSteps from '../algorithms/heapSort';
 import generateInsertionSortSteps from '../algorithms/insertionSort';
+import generateRadixSortSteps from '../algorithms/radixSort';
 
 //* hook for animations
 export const useSortingAnimation = (
@@ -112,6 +113,11 @@ export const useSortingAnimation = (
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
       console.log("Regenerated insertion sort steps:", sortingSteps.length);
+    } else if (selectedAlgorithm == 'radix') {
+      const sortingSteps = generateRadixSortSteps(currentArray);
+      setSteps(sortingSteps);
+      setCurrentStepIndex(0);
+      console.log("Regenerated radix sort steps:", sortingSteps.length);
     }
   };
 
@@ -129,7 +135,8 @@ export const useSortingAnimation = (
         selectedAlgorithm === 'quick' || 
         selectedAlgorithm === 'selection' || 
         selectedAlgorithm === 'heap' ||
-        selectedAlgorithm === 'insertion') {
+        selectedAlgorithm === 'insertion' ||
+        selectedAlgorithm === 'radix') {
       regenerateSteps(newArray);
     }
   };
