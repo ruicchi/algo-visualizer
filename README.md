@@ -1,7 +1,7 @@
 # Sorting Visualizer
 A project for visualizing sorting algorithms.
 
-![Demo](assets/demo.gif)
+![Demo](src/assets/demo.gif)
 
 ## React + TypeScript + Vite
 
