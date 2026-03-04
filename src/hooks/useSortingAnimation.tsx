@@ -1,4 +1,4 @@
-//# sorting animation hook | buttons, 
+//# sorting animation hook | buttons,
 
 import { useState, useEffect } from 'react';
 import generateBubbleSortSteps from '../algorithms/bubbleSort';
@@ -11,13 +11,13 @@ import generateRadixSortSteps from '../algorithms/radixSort';
 
 //* hook for animations
 export const useSortingAnimation = (
-  arraySize, 
+  arraySize,
   setArraySize,
-  generateNewArray, 
-  setArray, 
-  selectedAlgorithm, 
-  array) => {
-
+  generateNewArray,
+  setArray,
+  selectedAlgorithm,
+  array,
+) => {
   //* initializes steps, index, and playing state
   const [steps, setSteps] = useState([]);
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
@@ -25,35 +25,33 @@ export const useSortingAnimation = (
 
   //* State for progress speed, using percentage for easier understanding
   const [progressSpeed, setProgressSpeed] = useState<number[]>(50);
-  
+
   //* Animation states
   const [comparingIndices, setComparingIndices] = useState<number[]>([]); //^ which bars to highlight?
   const [sortedIndices, setSortedIndices] = useState<number[]>([]); //^ which bars are in final position
   const [swappingIndices, setSwappingIndices] = useState<number[]>([]); //^ which bars are swapping?
   const [activeIndices, setActiveIndices] = useState<number[]>([]); //^ which bars are active?
-  
+
   //* listener
   useEffect(() => {
-      //* only runs if playing and not at end
-      if (isPlaying && currentStepIndex < steps.length - 1) {
-        
-        //* Calculate delay based on speed slider
-        //* progressSpeed is 1-100, convert to milliseconds
-        const delay = 1000 - (progressSpeed * 9); //* Fast = low delay | can be set to another value
-        
-        //* Set timer to advance to next step
-        const timer = setTimeout(() => {
-          setCurrentStepIndex(prev => prev + 1);
-        }, delay);
-        
-        //* Cleanup: cancel timer if something changes
-        return () => clearTimeout(timer);
-        
-      } else if (currentStepIndex >= steps.length - 1) {
-        //* Reached the end, stop playing
-        setIsPlaying(false);
-      }
-    }, [isPlaying, currentStepIndex, steps.length, progressSpeed]);
+    //* only runs if playing and not at end
+    if (isPlaying && currentStepIndex < steps.length - 1) {
+      //* Calculate delay based on speed slider
+      //* progressSpeed is 1-100, convert to milliseconds
+      const delay = 1000 - progressSpeed * 9; //* Fast = low delay | can be set to another value
+
+      //* Set timer to advance to next step
+      const timer = setTimeout(() => {
+        setCurrentStepIndex((prev) => prev + 1);
+      }, delay);
+
+      //* Cleanup: cancel timer if something changes
+      return () => clearTimeout(timer);
+    } else if (currentStepIndex >= steps.length - 1) {
+      //* Reached the end, stop playing
+      setIsPlaying(false);
+    }
+  }, [isPlaying, currentStepIndex, steps.length, progressSpeed]);
 
   //*handler for play
   const play = () => {
@@ -66,12 +64,12 @@ export const useSortingAnimation = (
   };
 
   const handlePlayPause = () => {
-  if (isPlaying) {
-    pause();
-  } else {
-    play();
-  }
-  setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      pause();
+    } else {
+      play();
+    }
+    setIsPlaying(!isPlaying);
   };
 
   //*handler for reset
@@ -87,37 +85,37 @@ export const useSortingAnimation = (
       const sortingSteps = generateBubbleSortSteps(currentArray);
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
-      console.log("Regenerated bubble sort steps:", sortingSteps.length);
+      console.log('Regenerated bubble sort steps:', sortingSteps.length);
     } else if (selectedAlgorithm == 'merge') {
       const sortingSteps = generateMergeSortSteps(currentArray);
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
-      console.log("Regenerated merge sort steps:", sortingSteps.length);
+      console.log('Regenerated merge sort steps:', sortingSteps.length);
     } else if (selectedAlgorithm == 'quick') {
       const sortingSteps = generateQuickSortSteps(currentArray);
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
-      console.log("Regenerated quick sort steps:", sortingSteps.length);
+      console.log('Regenerated quick sort steps:', sortingSteps.length);
     } else if (selectedAlgorithm == 'selection') {
       const sortingSteps = generateSelectionSortSteps(currentArray);
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
-      console.log("Regenerated selection sort steps:", sortingSteps.length);
+      console.log('Regenerated selection sort steps:', sortingSteps.length);
     } else if (selectedAlgorithm == 'heap') {
       const sortingSteps = generateHeapSortSteps(currentArray);
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
-      console.log("Regenerated heap sort steps:", sortingSteps.length);
+      console.log('Regenerated heap sort steps:', sortingSteps.length);
     } else if (selectedAlgorithm == 'insertion') {
       const sortingSteps = generateInsertionSortSteps(currentArray);
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
-      console.log("Regenerated insertion sort steps:", sortingSteps.length);
+      console.log('Regenerated insertion sort steps:', sortingSteps.length);
     } else if (selectedAlgorithm == 'radix') {
       const sortingSteps = generateRadixSortSteps(currentArray);
       setSteps(sortingSteps);
       setCurrentStepIndex(0);
-      console.log("Regenerated radix sort steps:", sortingSteps.length);
+      console.log('Regenerated radix sort steps:', sortingSteps.length);
     }
   };
 
@@ -128,15 +126,17 @@ export const useSortingAnimation = (
     setIsPlaying(false);
     setComparingIndices([]);
     setSortedIndices([]);
-    
+
     //* Regenerate steps if an algorithm was selected
-    if (selectedAlgorithm === 'bubble' || 
-        selectedAlgorithm === 'merge' || 
-        selectedAlgorithm === 'quick' || 
-        selectedAlgorithm === 'selection' || 
-        selectedAlgorithm === 'heap' ||
-        selectedAlgorithm === 'insertion' ||
-        selectedAlgorithm === 'radix') {
+    if (
+      selectedAlgorithm === 'bubble' ||
+      selectedAlgorithm === 'merge' ||
+      selectedAlgorithm === 'quick' ||
+      selectedAlgorithm === 'selection' ||
+      selectedAlgorithm === 'heap' ||
+      selectedAlgorithm === 'insertion' ||
+      selectedAlgorithm === 'radix'
+    ) {
       regenerateSteps(newArray);
     }
   };
@@ -194,33 +194,32 @@ export const useSortingAnimation = (
 
   //study array mapper to have bars on numbers with index
   const arrayBars = array.map((value, index) => {
-      
-      let barColor = '#00a4db';  //* default blue
-  
-      if (sortedIndices.includes(index)) {
-        barColor = '#10b981';  //* green for sorted
-      } else if (comparingIndices.includes(index)) {
-        barColor = '#f59e0b';  //* orang for comparing
-      } else if (swappingIndices && swappingIndices.includes(index)) {
-        barColor = '#ef4444';  //* red for swapping
-      } else if (activeIndices && activeIndices.includes(index)) {
-        barColor = '#8b5cf6';  //* purple for active subarray
-      }
+    let barColor = '#00a4db'; //* default blue
 
-      return (
-        <div
-          key={index}
-          className='arrayBar'
-          style={{ 
-            height: `${value * 3}px`,
-            backgroundColor: barColor,
-            transition: 'all 0.3s ease'
-          }} 
-        >
-          <span className='barValue'>{value}</span> 
-          <span className="indexLabel">{index}</span> 
-        </div>
-      );
+    if (sortedIndices.includes(index)) {
+      barColor = '#10b981'; //* green for sorted
+    } else if (comparingIndices.includes(index)) {
+      barColor = '#f59e0b'; //* orang for comparing
+    } else if (swappingIndices && swappingIndices.includes(index)) {
+      barColor = '#ef4444'; //* red for swapping
+    } else if (activeIndices && activeIndices.includes(index)) {
+      barColor = '#8b5cf6'; //* purple for active subarray
+    }
+
+    return (
+      <div
+        key={index}
+        className="arrayBar"
+        style={{
+          height: `${value * 3}px`,
+          backgroundColor: barColor,
+          transition: 'all 0.3s ease',
+        }}
+      >
+        <span className="barValue">{value}</span>
+        <span className="indexLabel">{index}</span>
+      </div>
+    );
   });
 
   return {
@@ -245,6 +244,6 @@ export const useSortingAnimation = (
     handleProgressChange,
     randomize,
     currentStep,
-    arrayBars
+    arrayBars,
   };
 };

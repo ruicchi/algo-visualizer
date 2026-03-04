@@ -23,7 +23,7 @@ function generateRadixSortSteps(inputArray: number[]): Step[] {
     comparingIndices: [],
     swappingIndices: [],
     activeIndices: [],
-    description: "Initial array"
+    description: 'Initial array',
   });
 
   const maxNum = getMax(array);
@@ -43,14 +43,14 @@ function generateRadixSortSteps(inputArray: number[]): Step[] {
         comparingIndices: [i],
         swappingIndices: [],
         activeIndices: [],
-        description: `Place ${array[i]} in bucket ${currentDigit} (digit ${digit + 1})`
+        description: `Place ${array[i]} in bucket ${currentDigit} (digit ${digit + 1})`,
       });
     }
 
     // Flatten buckets back into array
     let idx = 0;
     for (let b = 0; b < 10; b++) {
-      for (let val of buckets[b]) {
+      for (const val of buckets[b]) {
         array[idx] = val;
         steps.push({
           array: [...array],
@@ -58,7 +58,7 @@ function generateRadixSortSteps(inputArray: number[]): Step[] {
           comparingIndices: [],
           swappingIndices: [idx],
           activeIndices: [],
-          description: `Collect ${val} from bucket ${b} to position ${idx}`
+          description: `Collect ${val} from bucket ${b} to position ${idx}`,
         });
         idx++;
       }
@@ -71,7 +71,7 @@ function generateRadixSortSteps(inputArray: number[]): Step[] {
       comparingIndices: [],
       swappingIndices: [],
       activeIndices: [],
-      description: `After pass ${digit + 1}`
+      description: `After pass ${digit + 1}`,
     });
   }
 
@@ -82,7 +82,7 @@ function generateRadixSortSteps(inputArray: number[]): Step[] {
     comparingIndices: [],
     swappingIndices: [],
     activeIndices: [],
-    description: "Array fully sorted"
+    description: 'Array fully sorted',
   });
 
   return steps;

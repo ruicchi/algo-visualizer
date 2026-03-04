@@ -15,29 +15,71 @@ export const handleSortTypeClick = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
-  switch(selectedAlgorithm) {
+  switch (selectedAlgorithm) {
     case 'bubble':
-      handleBubbleSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      handleBubbleSort(
+        array,
+        setSelectedAlgorithm,
+        setSteps,
+        setCurrentStepIndex,
+        setIsPlaying,
+      );
       break;
     case 'merge':
-      handleMergeSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      handleMergeSort(
+        array,
+        setSelectedAlgorithm,
+        setSteps,
+        setCurrentStepIndex,
+        setIsPlaying,
+      );
       break;
     case 'quick':
-      handleQuickSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      handleQuickSort(
+        array,
+        setSelectedAlgorithm,
+        setSteps,
+        setCurrentStepIndex,
+        setIsPlaying,
+      );
       break;
     case 'selection':
-      handleSelectionSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      handleSelectionSort(
+        array,
+        setSelectedAlgorithm,
+        setSteps,
+        setCurrentStepIndex,
+        setIsPlaying,
+      );
       break;
     case 'heap':
-      handleHeapSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      handleHeapSort(
+        array,
+        setSelectedAlgorithm,
+        setSteps,
+        setCurrentStepIndex,
+        setIsPlaying,
+      );
       break;
     case 'insertion':
-      handleInsertionSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      handleInsertionSort(
+        array,
+        setSelectedAlgorithm,
+        setSteps,
+        setCurrentStepIndex,
+        setIsPlaying,
+      );
       break;
     case 'radix':
-      handleRadixSort(array, setSelectedAlgorithm, setSteps, setCurrentStepIndex, setIsPlaying);
+      handleRadixSort(
+        array,
+        setSelectedAlgorithm,
+        setSteps,
+        setCurrentStepIndex,
+        setIsPlaying,
+      );
       break;
   }
 };
@@ -48,18 +90,18 @@ const handleBubbleSort = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
   const sortingSteps = generateBubbleSortSteps(array); //^ Generate all steps
-  setSelectedAlgorithm('bubble') //^ sets selected algorithm
-  
+  setSelectedAlgorithm('bubble'); //^ sets selected algorithm
+
   setSteps(sortingSteps); //^ Store steps in state
-    
+
   //* resets to beginning
   setCurrentStepIndex(0);
   setIsPlaying(false);
 
-  console.log("Generated steps:", sortingSteps.length);
+  console.log('Generated steps:', sortingSteps.length);
 };
 
 //* handler for merge sort
@@ -68,18 +110,18 @@ const handleMergeSort = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
   const sortingSteps = generateMergeSortSteps(array); //^ Generate all steps
-  setSelectedAlgorithm('merge') //^ sets selected algorithm
-  
+  setSelectedAlgorithm('merge'); //^ sets selected algorithm
+
   setSteps(sortingSteps); //^ Store steps in state
-    
+
   //* resets to beginning
   setCurrentStepIndex(0);
   setIsPlaying(false);
 
-  console.log("Generated steps:", sortingSteps.length);
+  console.log('Generated steps:', sortingSteps.length);
 };
 
 //* handler for quick sort
@@ -88,7 +130,7 @@ const handleQuickSort = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
   const sortingSteps = generateQuickSortSteps(array); //^ Generate all steps
   setSelectedAlgorithm('quick'); //^ sets selected algorithm
@@ -99,7 +141,7 @@ const handleQuickSort = (
   setCurrentStepIndex(0);
   setIsPlaying(false);
 
-  console.log("Generated steps:", sortingSteps.length);
+  console.log('Generated steps:', sortingSteps.length);
 };
 
 //* handler for selection sort
@@ -108,7 +150,7 @@ const handleSelectionSort = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
   const sortingSteps = generateSelectionSortSteps(array); //^ Generate all steps
   setSelectedAlgorithm('selection'); //^ sets selected algorithm
@@ -119,7 +161,7 @@ const handleSelectionSort = (
   setCurrentStepIndex(0);
   setIsPlaying(false);
 
-  console.log("Generated steps:", sortingSteps.length);
+  console.log('Generated steps:', sortingSteps.length);
 };
 
 //* handler for selection sort
@@ -128,7 +170,7 @@ const handleHeapSort = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
   const sortingSteps = generateHeapSortSteps(array); //^ Generate all steps
   setSelectedAlgorithm('heap'); //^ sets selected algorithm
@@ -139,7 +181,7 @@ const handleHeapSort = (
   setCurrentStepIndex(0);
   setIsPlaying(false);
 
-  console.log("Generated steps:", sortingSteps.length);
+  console.log('Generated steps:', sortingSteps.length);
 };
 
 //* handler for insertion sort
@@ -148,7 +190,7 @@ const handleInsertionSort = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
   const sortingSteps = generateInsertionSortSteps(array); //^ Generate all steps
   setSelectedAlgorithm('insertion'); //^ sets selected algorithm
@@ -159,7 +201,7 @@ const handleInsertionSort = (
   setCurrentStepIndex(0);
   setIsPlaying(false);
 
-  console.log("Generated steps:", sortingSteps.length);
+  console.log('Generated steps:', sortingSteps.length);
 };
 
 //* handler for radix sort
@@ -168,7 +210,7 @@ const handleRadixSort = (
   setSelectedAlgorithm,
   setSteps,
   setCurrentStepIndex,
-  setIsPlaying
+  setIsPlaying,
 ) => {
   const sortingSteps = generateRadixSortSteps(array); //^ Generate all steps
   setSelectedAlgorithm('radix'); //^ sets selected algorithm
@@ -179,5 +221,5 @@ const handleRadixSort = (
   setCurrentStepIndex(0);
   setIsPlaying(false);
 
-  console.log("Generated steps:", sortingSteps.length);
+  console.log('Generated steps:', sortingSteps.length);
 };
